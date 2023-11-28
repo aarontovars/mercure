@@ -296,7 +296,7 @@ def main(args=sys.argv[1:]) -> None:
         InfluxDBSender.initialize_sender(
             config.mercure.influxdb_host,
             config.mercure.influxdb_token,
-            config.mercure.influxdb_organization,
+            config.mercure.influxdb_org,
             config.mercure.influxdb_bucket,
             "mercure." + appliance_name + ".router." + instance_name
         )
