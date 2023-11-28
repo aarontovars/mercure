@@ -13,7 +13,7 @@ from typing import Callable, Optional
 import graphyte
 import aiohttp
 import os
-from influxdb import InfluxDBSender
+from common.influxdb import InfluxDBSender
 
 # Global variable to broadcast when the process should terminate
 terminate = False
