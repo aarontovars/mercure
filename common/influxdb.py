@@ -1,4 +1,4 @@
-from influxdb import InfluxDBClient
+from influxdb_client import InfluxDBClient
 
 class InfluxDBSender:
     def __init__(self, host, token, organization, bucket, metric_prefix):
