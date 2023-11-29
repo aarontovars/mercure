@@ -46,9 +46,10 @@ def send_to_graphite(*args, **kwargs) -> None:
 
 def send_to_influxdb(*args, **kwargs) -> None:
     """Wrapper for asynchronous influxdb call to avoid wait time of main loop."""
-    if InfluxDBSender.client == None:
+    sender = InfluxDBSender()
+    if sender.client == None:
         return
-    InfluxDBSender.client.send_data(*args, **kwargs)
+    sender.send_data(*args, **kwargs)
 
 def g_log(*args, **kwargs) -> None:
     global loop
