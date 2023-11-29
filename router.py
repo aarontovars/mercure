@@ -24,7 +24,7 @@ import common.monitor as monitor
 from routing.route_series import route_series, route_error_files
 from routing.route_studies import route_studies
 from routing.common import generate_task_id
-from common.influxdb import InfluxDBSender
+import common.influxdb
 
 # Create local logger instance
 logger = config.get_logger()
@@ -172,14 +172,13 @@ def main(args=sys.argv[1:]) -> None:
 
     if len(config.mercure.influxdb_host) > 0:
         logger.info(f"Sending events to influxdb server: {config.mercure.influxdb_host}")
-        sender = InfluxDBSender(
+        common.influxdb.init(
             config.mercure.influxdb_host,
             config.mercure.influxdb_token,
             config.mercure.influxdb_org,
             config.mercure.influxdb_bucket,
             "mercure." + appliance_name + ".router." + instance_name
         )
-        sender.initialize_sender()
 
     logger.info(
         f"""Incoming folder: {config.mercure.incoming_folder}

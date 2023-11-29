@@ -13,7 +13,7 @@ from typing import Callable, Optional
 import graphyte
 import aiohttp
 import os
-from common.influxdb import InfluxDBSender
+import common.influxdb
 
 # Global variable to broadcast when the process should terminate
 terminate = False
@@ -46,11 +46,9 @@ def send_to_graphite(*args, **kwargs) -> None:
 
 def send_to_influxdb(*args, **kwargs) -> None:
     """Wrapper for asynchronous influxdb call to avoid wait time of main loop."""
-    sender = InfluxDBSender()
-    sender.initialize_sender()
-    if sender.client == None:
+    if common.influxdb.default_sender == None:
         return
-    sender.send_data(*args, **kwargs)
+    common.influxdb.default_sender.send(*args, **kwargs)
 
 def g_log(*args, **kwargs) -> None:
     global loop

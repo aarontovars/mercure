@@ -28,7 +28,7 @@ import common.helper as helper
 import common.monitor as monitor
 from common.monitor import task_event
 from common.constants import mercure_defs
-from common.influxdb import InfluxDBSender
+import common.influxdb
 
 
 # Setup daiquiri logger
@@ -227,14 +227,13 @@ def main(args=sys.argv[1:]) -> None:
 
     if len(config.mercure.influxdb_host) > 0:
         logger.info(f"Sending events to influxdb server: {config.mercure.influxdb_host}")
-        sender = InfluxDBSender(
+        common.influxdb.init(
             config.mercure.influxdb_host,
             config.mercure.influxdb_token,
             config.mercure.influxdb_org,
             config.mercure.influxdb_bucket,
             "mercure." + appliance_name + ".router." + instance_name
         )
-        sender.initialize_sender()
 
     global main_loop
     main_loop = helper.AsyncTimer(config.mercure.cleaner_scan_interval, clean)
