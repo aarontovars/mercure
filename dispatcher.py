@@ -151,14 +151,14 @@ def main(args=sys.argv[1:]) -> None:
 
     if len(config.mercure.influxdb_host) > 0:
         logger.info(f"Sending events to influxdb server: {config.mercure.influxdb_host}")
-        InfluxDBSender(
+        sender = InfluxDBSender(
             config.mercure.influxdb_host,
             config.mercure.influxdb_token,
             config.mercure.influxdb_org,
             config.mercure.influxdb_bucket,
             "mercure." + appliance_name + ".router." + instance_name
         )
-        InfluxDBSender.initialize_sender()
+        sender.initialize_sender()
 
     logger.info(f"Dispatching folder: {config.mercure.outgoing_folder}")
     dispatcher_lockfile = Path(config.mercure.outgoing_folder + "/" + mercure_names.HALT)
