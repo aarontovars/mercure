@@ -10,7 +10,6 @@ class Singleton(type):
 
 class InfluxDBSender(metaclass=Singleton):
     def __init__(self, host=None, token=None, organization=None, bucket=None, metric_prefix=None):
-        if host and token and organization and bucket and metric_prefix:
             self.host = host
             self.token = token
             self.organization = organization
