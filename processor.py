@@ -293,7 +293,7 @@ def main(args=sys.argv[1:]) -> None:
 
     if len(config.mercure.influxdb_host) > 0:
         logger.info(f"Sending events to influxdb server: {config.mercure.influxdb_host}")
-        common.influxdb(
+        common.influxdb.init(
             config.mercure.influxdb_host,
             config.mercure.influxdb_token,
             config.mercure.influxdb_org,
