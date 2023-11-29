@@ -1,5 +1,5 @@
 from influxdb_client import InfluxDBClient
-from influxdb_client.client.write_api import SYNCHRONOUS
+from influxdb_client.client.write_api import ASYNCHRONOUS
 
 class Singleton(type):
     _instances = {}
@@ -24,7 +24,7 @@ class InfluxDBSender(metaclass=Singleton):
             self.client.close()
             self.write_api = None
         self.client = InfluxDBClient(url=self.host, token=self.token, org=self.organization, bucket=self.bucket)
-        self.write_api = self.client.write_api(write_options=SYNCHRONOUS)
+        self.write_api = self.client.write_api(write_options=ASYNCHRONOUS)
 
     def send_data(self, metric_name, value):
         full_metric_name = self.metric_prefix + "." + metric_name
