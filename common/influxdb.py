@@ -30,7 +30,7 @@ class InfluxDBSender(metaclass=Singleton):
                 "value": value
             }
         }
-        self.client.write_points([data])
+        self.client.write(database=self.bucket, record=data)
 
     def close_sender(self):
         if self.client:
