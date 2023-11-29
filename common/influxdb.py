@@ -88,7 +88,7 @@ class Sender:
 
         return message
 
-    def send(self, metric, value, timestamp=None, tags={}):
+    def send(self, metric, value, timestamp=None):
         """Send given metric and (int or float) value to InfluxDB host.
         Performs send on background thread if "interval" was specified when
         creating this Sender.
@@ -98,7 +98,7 @@ class Sender:
         """
         if timestamp is None:
             timestamp = time.time()
-        message = self.build_message(metric, value, timestamp, tags=tags)
+        message = self.build_message(metric, value, timestamp)
 
         if self.interval is None:
             self.send_socket(message)
