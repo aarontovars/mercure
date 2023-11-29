@@ -227,13 +227,14 @@ def main(args=sys.argv[1:]) -> None:
 
     if len(config.mercure.influxdb_host) > 0:
         logger.info(f"Sending events to influxdb server: {config.mercure.influxdb_host}")
-        InfluxDBSender.initialize_sender(
+        InfluxDBSender(
             config.mercure.influxdb_host,
             config.mercure.influxdb_token,
             config.mercure.influxdb_org,
             config.mercure.influxdb_bucket,
             "mercure." + appliance_name + ".router." + instance_name
         )
+        InfluxDBSender.initialize_sender()
 
     global main_loop
     main_loop = helper.AsyncTimer(config.mercure.cleaner_scan_interval, clean)
