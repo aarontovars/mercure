@@ -232,7 +232,7 @@ def main(args=sys.argv[1:]) -> None:
             config.mercure.influxdb_token,
             config.mercure.influxdb_org,
             config.mercure.influxdb_bucket,
-            "mercure." + appliance_name + ".router." + instance_name
+            "mercure." + appliance_name + ".cleaner." + instance_name
         )
 
     global main_loop
