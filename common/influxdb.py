@@ -128,7 +128,7 @@ class Sender:
         else:
             if self.log_sends:
                 elapsed_time = time.time() - start_time
-                logger.info('sent message {!r} to {}:{} in {:.03f} seconds'.format(
+                logger.info('sent message {!r} to {} in {:.03f} seconds'.format(
                         message, self.host, elapsed_time))
 
     def _thread_loop(self):
