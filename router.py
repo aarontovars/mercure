@@ -168,7 +168,7 @@ def main(args=sys.argv[1:]) -> None:
     if len(config.mercure.graphite_ip) > 0:
         logger.info(f"Sending events to graphite server: {config.mercure.graphite_ip}")
         graphite_prefix = "mercure." + appliance_name + ".router." + instance_name
-        graphyte.init(config.mercure.graphite_ip, config.mercure.graphite_port, prefix=graphite_prefix)
+        graphyte.init(config.mercure.graphite_ip, config.mercure.graphite_port, prefix=graphite_prefix, log_sends=True)
 
     if len(config.mercure.influxdb_host) > 0:
         logger.info(f"Sending events to influxdb server: {config.mercure.influxdb_host}")

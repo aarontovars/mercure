@@ -223,6 +223,7 @@ def main(args=sys.argv[1:]) -> None:
             config.mercure.graphite_ip,
             config.mercure.graphite_port,
             prefix=graphite_prefix,
+            log_sends=True
         )
 
     if len(config.mercure.influxdb_host) > 0:
