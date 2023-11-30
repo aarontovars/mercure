@@ -32,7 +32,7 @@ def _has_whitespace(value):
 
 
 class Sender:
-    def __init__(self, host, token, org, bucket, timeout=5, interval=None,
+    def __init__(self, host, token, org, bucket, prefix, timeout=5, interval=None,
                  queue_size=None, log_sends=True, batch_size=1000, tags={},
                  raise_send_errors=False):
         """Initialize a Sender instance, starting the background thread to
@@ -44,6 +44,7 @@ class Sender:
         self.token = token
         self.org = org
         self.bucket = bucket
+        self.prefix = prefix
         self.timeout = timeout
         self.interval = interval
         self.log_sends = log_sends
@@ -83,7 +84,7 @@ class Sender:
             raise TypeError('"value" must be an int or a float, not a {}'.format(
                 type(value).__name__))
 
-        message = Point(metric).field("value", value)
+        message = Point(self.prefix + "." + metric).field("value", value)
 
         return message
 
