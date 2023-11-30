@@ -14,7 +14,6 @@ try:
     import queue
 except ImportError:
     import Queue as queue  # Python 2.x compatibility
-import socket
 import threading
 import time
 from influxdb_client import InfluxDBClient, Point
@@ -34,7 +33,7 @@ def _has_whitespace(value):
 
 class Sender:
     def __init__(self, host, token, org, bucket, timeout=5, interval=None,
-                 queue_size=None, log_sends=False, batch_size=1000, tags={},
+                 queue_size=None, log_sends=True, batch_size=1000, tags={},
                  raise_send_errors=False):
         """Initialize a Sender instance, starting the background thread to
         send messages at given interval (in seconds) if "interval" is not
