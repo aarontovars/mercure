@@ -128,8 +128,8 @@ class Sender:
         else:
             if self.log_sends:
                 elapsed_time = time.time() - start_time
-                logger.info('sent message {!r} to {} in {:.03f} seconds'.format(
-                        message, self.host, elapsed_time))
+                logger.info('sent message {!r} to ({}, {}, {}, {}, {}) in {:.03f} seconds'.format(
+                        message.to_line_protocol(), self.host, self.token, self.org, self.bucket, self.type, elapsed_time))
 
     def _thread_loop(self):
         """Background thread used when Sender is in asynchronous/interval mode."""
