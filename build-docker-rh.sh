@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PREFIX="mercureimaging"
-TAG${MERCURE_TAG:-$VERSION}
+TAG=${MERCURE_TAG:-$VERSION}
 # Define where mercure is going to store things
 # You can redefine types of volumes in docker/docker-compose.yml
 
