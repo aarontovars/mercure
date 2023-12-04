@@ -10,7 +10,7 @@ error() {
 trap 'error ${LINENO}' ERR
 
 UBUNTU_VERSION=$(lsb_release -rs)
-if [ $UBUNTU_VERSION != "9.3" ] && [ $UBUNTU_VERSION != "22.04" ]; then
+if [ $UBUNTU_VERSION != "20.04" ] && [ $UBUNTU_VERSION != "22.04" ]; then
   echo "Invalid operating system!"
   echo "This mercure version requires Ubuntu 20.04 LTS or 22.04 LTS"
   echo "Detected operating system = $UBUNTU_VERSION"
