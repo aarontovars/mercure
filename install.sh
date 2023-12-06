@@ -146,6 +146,14 @@ install_nomad () {
   if [ ! -d /etc/nomad.d ]; then
     sudo mkdir -p /etc/nomad.d
     sudo chmod a+w /etc/nomad.d
+    cat > /etc/nomad.d/nomad.hcl <<EOF
+    data_dir = "/var/nomad"
+
+    server {
+      enabled          = true
+      bootstrap_expect = 1
+    }
+EOF
   fi
 
   if [ ! -f "/etc/systemd/system/nomad.service" ]; then 
@@ -386,7 +394,7 @@ systemd_install () {
   install_configuration
   sudo cp "$MERCURE_SRC"/installation/mercure-sudoer /etc/sudoers.d/mercure
   install_packages
-  install_docker
+  #install_docker
   install_app_files
   install_dependencies
   install_postgres
