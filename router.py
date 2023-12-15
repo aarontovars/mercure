@@ -64,6 +64,114 @@ def run_router() -> None:
         )
         return
 
+
+    filecount = 0
+    series: Dict[str, float] = {}
+
+    # Check the processing folder for series being processed. Generate a map of all
+    # series in the folder with the timestamp of the latest DICOM file as value
+    for root, _, files in os.walk(config.mercure.processing_folder):
+        if "in" in os.path.normpath(root).split(os.sep):
+            for file in files:
+                if file.endswith(".dcm"):
+                    filecount += 1
+                    seriesString = file.split("#", 1)[0]
+                    file_path = os.path.join(root, file)
+                    modificationTime = os.stat(file_path).st_mtime
+
+                    if seriesString in series:
+                        if modificationTime > series[seriesString]:
+                            series[seriesString] = modificationTime
+                    else:
+                        series[seriesString] = modificationTime
+
+    helper.g_log("processing.files", filecount)
+    helper.g_log("processing.series", len(series))
+
+    filecount = 0
+    series: Dict[str, float] = {}
+
+    # Check the outgoing folder for series to be dispatched. To this end, generate a map
+    # of all series in the folder with the timestamp of the latest DICOM file as value
+    for root, _, files in os.walk(config.mercure.outgoing_folder):
+        for file in files:
+            if file.endswith(".dcm"):
+                filecount += 1
+                seriesString = file.split("#", 1)[0]
+                file_path = os.path.join(root, file)
+                modificationTime = os.stat(file_path).st_mtime
+
+                if seriesString in series:
+                    if modificationTime > series[seriesString]:
+                        series[seriesString] = modificationTime
+                else:
+                    series[seriesString] = modificationTime
+    helper.g_log("outgoing.files", filecount)
+    helper.g_log("outgoing.series", len(series))
+
+    filecount = 0
+    series: Dict[str, float] = {}
+
+    # Check the success folder for completed series. To this end, generate a map of all
+    # series in the folder with the timestamp of the latest DICOM file as value
+    for root, _, files in os.walk(config.mercure.success_folder):
+        for file in files:
+            if file.endswith(".dcm"):
+                filecount += 1
+                seriesString = file.split("#", 1)[0]
+                file_path = os.path.join(root, file)
+                modificationTime = os.stat(file_path).st_mtime
+
+                if seriesString in series:
+                    if modificationTime > series[seriesString]:
+                        series[seriesString] = modificationTime
+                else:
+                    series[seriesString] = modificationTime
+    helper.g_log("success.files", filecount)
+    helper.g_log("success.series", len(series))
+
+    filecount = 0
+    series: Dict[str, float] = {}
+
+    # Check the error folder for series not parsed/dispatched. Generate a map of all 
+    # series in the folder with the timestamp of the latest DICOM file as value
+    for root, _, files in os.walk(config.mercure.error_folder):
+        for file in files:
+            if file.endswith(".dcm"):
+                filecount += 1
+                seriesString = file.split("#", 1)[0]
+                file_path = os.path.join(root, file)
+                modificationTime = os.stat(file_path).st_mtime
+
+                if seriesString in series:
+                    if modificationTime > series[seriesString]:
+                        series[seriesString] = modificationTime
+                else:
+                    series[seriesString] = modificationTime
+    helper.g_log("error.files", filecount)
+    helper.g_log("error.series", len(series))
+
+    filecount = 0
+    series: Dict[str, float] = {}
+
+    # Check the discard folder for discarded series. To this end, generate a map of all
+    # series in the folder with the timestamp of the latest DICOM file as value
+    for root, _, files in os.walk(config.mercure.discard_folder):
+        for file in files:
+            if file.endswith(".dcm"):
+                filecount += 1
+                seriesString = file.split("#", 1)[0]
+                file_path = os.path.join(root, file)
+                modificationTime = os.stat(file_path).st_mtime
+
+                if seriesString in series:
+                    if modificationTime > series[seriesString]:
+                        series[seriesString] = modificationTime
+                else:
+                    series[seriesString] = modificationTime
+    helper.g_log("discard.files", filecount)
+    helper.g_log("discard.series", len(series))
+
     filecount = 0
     series: Dict[str, float] = {}
     complete_series: Dict[str, float] = {}
