@@ -37,6 +37,16 @@ Key                                      Meaning
 ======================================== ===========================================================================
 mercure.router.main.incoming.series      Number series in the incoming folder waiting for completion
 mercure.router.main.incoming.files       Number of received DICOM files waiting in the incoming folder
+mercure.router.main.processing.series    Number series in the processing folder being processed
+mercure.router.main.processing.files     Number of DICOM files in the processing folder
+mercure.router.main.outgoing.series      Number series in the outgoing folder to be dispatched
+mercure.router.main.outgoing.files       Number of DICOM files in the outgoing folder
+mercure.router.main.success.series       Number series in the success folder for completed series
+mercure.router.main.success.files        Number of DICOM files in the success folder
+mercure.router.main.error.series         Number series in the error folder for series not parsed/dispatched
+mercure.router.main.error.files          Number of DICOM files in the error folder
+mercure.router.main.discard.series       Number series in the discard folder for discarded series
+mercure.router.main.discard.files        Number of DICOM files in the discard folder
 mercure.router.main.events.run           Triggered when the router checks for incoming files (value=1)
 mercure.router.main.events.boot          Triggered when the router is started (value=1)
 mercure.router.main.events.shutdown      Triggered when the router shuts down (value=1)
